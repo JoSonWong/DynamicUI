@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         data.add(createImage(300, 800));
 
-        //容器1
+        //容器0
         ElementAttr container0 = new ElementAttr();
         container0.viewType = "c_VLayout";
         container0.width = 400;
@@ -62,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
         container0.elements = elementImg0;
         data.add(container0);
 
+        //容器0
+        ElementAttr container = new ElementAttr();
+        container.viewType = "c_VLayout";
+        container.width = 400;
+        container.height = 800;
+        List<ElementAttr> elementImgListSong = new ArrayList<>();
+        elementImgListSong.add(createText(400, 100));
+        elementImgListSong.add(createList(400, 500, true));
+        elementImgListSong.add(createList(400, 200, false));
+
+        container.elements = elementImgListSong;
+        data.add(container);
 
         //容器
         ElementAttr container1 = new ElementAttr();
@@ -139,7 +151,27 @@ public class MainActivity extends AppCompatActivity {
         root.addView(hLayout, new ScrollView.LayoutParams(ScrollView.LayoutParams.WRAP_CONTENT, ScrollView.LayoutParams.WRAP_CONTENT));
     }
 
-    private ElementAttr createBanner(int w,int h){
+    private ElementAttr createList(int w, int h, boolean vertical) {
+        ElementAttr element = new ElementAttr();
+        element.viewType = vertical ? "v_VList" : "v_HList";
+        element.width = w;
+        element.height = h;
+        element.bgColor = randomColor();
+        Random random = new Random();
+        String imgUrl = imageUrls[random.nextInt(imageUrls.length)];
+        element.url = imgUrl;
+        element.action = imgUrl;
+        element.textSize = 50;
+        element.text = "模块D";
+        element.textColor = randomColor();
+        element.gravity = 17;
+        element.corner = 0;
+        element.paddings = new int[]{10, 10, 10, 10};
+        element.images = new String[]{"我的好兄弟", "我的好兄弟", "我的好兄弟"};
+        return element;
+    }
+
+    private ElementAttr createBanner(int w, int h) {
         ElementAttr element = new ElementAttr();
         element.viewType = "v_banner";
         element.width = w;
@@ -154,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
         element.textColor = randomColor();
         element.gravity = 17;
         element.corner = 0;
-        element.paddings = new int[]{5, 10, 15, 20};
-        element.images=imageUrls;
+        element.paddings = new int[]{10, 10, 10, 10};
+        element.images = imageUrls;
         return element;
     }
 
@@ -172,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         element.textColor = randomColor();
         element.gravity = 17;
         element.corner = 0;
-        element.paddings = new int[]{5, 10, 15, 20};
+        element.paddings = new int[]{10, 10, 10, 10};
         return element;
     }
 
@@ -192,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         element.textColor = randomColor();
         element.gravity = 17;
         element.corner = 0;
-        element.paddings = new int[]{5, 10, 15, 20};
+        element.paddings = new int[]{10, 10, 10, 10};
         return element;
     }
 

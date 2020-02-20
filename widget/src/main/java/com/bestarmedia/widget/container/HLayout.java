@@ -10,9 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bestarmedia.widget.data.ElementAttr;
-import com.bestarmedia.widget.element.Banner;
+import com.bestarmedia.widget.element.KBanner;
 import com.bestarmedia.widget.element.DynamicImageView;
+import com.bestarmedia.widget.element.KList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,24 +88,60 @@ public class HLayout extends LinearLayout implements View.OnClickListener {
                 view = text;
                 break;
             case "v_banner":
-                Banner banner = new Banner(getContext());
+                KBanner banner = new KBanner(getContext());
                 banner.setId(View.generateViewId());
-                if (!TextUtils.isEmpty(element.action)) {
-                    banner.setOnClickListener(this);
-                    banner.setTag(element.action);
-                }
                 if (!TextUtils.isEmpty(element.bgColor)) {
                     banner.setBackgroundColor(Color.parseColor(element.bgColor));
                 }
-                if(element.images!=null) {
+                if (element.images != null) {
                     banner.setImageList(element.images);
                 }
                 if (element.paddings != null && element.paddings.length == 4) {
                     banner.setPadding(element.paddings[0], element.paddings[1], element.paddings[2], element.paddings[3]);
                 }
+                if (!TextUtils.isEmpty(element.action)) {
+//                    banner.setOnBannerListener(new OnBannerListener() {
+//                        @Override
+//                        public void OnBannerClick(Object data, int position) {
+//                            Toast.makeText(getContext(), "banner click:" + position, Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        @Override
+//                        public void onBannerChanged(int position) {
+//                        }
+//                    });
+                    banner.setTag(element.action);
+                }
                 view = banner;
                 break;
-
+            case "v_VList":
+            case "v_HList":
+                KList kList = new KList(getContext());
+                kList.setId(View.generateViewId());
+                if (!TextUtils.isEmpty(element.bgColor)) {
+                    kList.setBackgroundColor(Color.parseColor(element.bgColor));
+                }
+                if (element.images != null) {
+                    kList.setItemList(element.images, "v_VList".equals(element.viewType) ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
+                }
+                if (element.paddings != null && element.paddings.length == 4) {
+                    kList.setPadding(element.paddings[0], element.paddings[1], element.paddings[2], element.paddings[3]);
+                }
+                if (!TextUtils.isEmpty(element.action)) {
+//                    banner.setOnBannerListener(new OnBannerListener() {
+//                        @Override
+//                        public void OnBannerClick(Object data, int position) {
+//                            Toast.makeText(getContext(), "banner click:" + position, Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        @Override
+//                        public void onBannerChanged(int position) {
+//                        }
+//                    });
+                    kList.setTag(element.action);
+                }
+                view = kList;
+                break;
             default:
                 DynamicImageView imageView = new DynamicImageView(getContext());
                 imageView.setId(View.generateViewId());
@@ -130,7 +169,7 @@ public class HLayout extends LinearLayout implements View.OnClickListener {
     private LinearLayout createContainer(ElementAttr element) {
         LinearLayout layout = new LinearLayout(getContext());
         LayoutParams layoutParams = new LinearLayout.LayoutParams(element.width, element.height);
-        layout.setOrientation(element.viewType.equals("c_HLayout")? HORIZONTAL : VERTICAL);
+        layout.setOrientation(element.viewType.equals("c_HLayout") ? HORIZONTAL : VERTICAL);
         layout.setLayoutParams(layoutParams);
         if (!TextUtils.isEmpty(element.bgColor)) {
             layout.setBackgroundColor(Color.parseColor(element.bgColor));

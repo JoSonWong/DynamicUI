@@ -18,17 +18,17 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class Banner extends com.youth.banner.Banner {
+public class KBanner extends com.youth.banner.Banner {
 
-    public Banner(@NonNull Context context) {
+    public KBanner(@NonNull Context context) {
         super(context);
     }
 
-    public Banner(@NonNull Context context, @NonNull AttributeSet attrs) {
+    public KBanner(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public Banner(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
+    public KBanner(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
